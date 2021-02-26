@@ -1,0 +1,23 @@
+{
+  "name": "tezos_hackaton_2021",
+  "version": "0.0.1",
+  "description": "Tezos Hackaton 2021",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "ganache-cli": "6.11.0-tezos.0",
+    "truffle": "^5.5.0-tezos.4"
+  },
+  "scripts": {
+    "start-sandbox": "ganache-cli --flavor tezos --seed alice"
+  },
+  "keywords": [
+    "tezos",
+    "ligo",
+    "blockchain",
+    "truffle",
+    "tezos_ukraine",
+    "tezos_israel"
+  ],
+  "author": "Sergey Makov <makov.sergey.it@gmail.com>"
+}
