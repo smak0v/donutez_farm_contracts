@@ -5,11 +5,21 @@
   "main": "index.js",
   "license": "MIT",
   "dependencies": {
+    "@taquito/michelson-encoder": "^8.0.3-beta.0",
+    "@taquito/signer": "^8.0.4-beta.0",
+    "@taquito/taquito": "^7.1.0-beta.0",
+    "child_process": "^1.0.2",
+    "commander": "^7.0.0",
+    "dotenv": "^8.2.0",
+    "fs": "^0.0.1-security",
     "ganache-cli": "6.11.0-tezos.0",
     "truffle": "^5.5.0-tezos.4"
   },
   "scripts": {
-    "start-sandbox": "ganache-cli --flavor tezos --seed alice"
+    "start-sandbox": "ganache-cli --flavor tezos --seed alice",
+    "compile-yf": "node scripts/cli.js build-yf --no-json -o contracts/main",
+    "compile-FA12-token": "node scripts/cli.js build-FA12-token --no-json -o contracts/main",
+    "compile-FA2-token": "node scripts/cli.js build-FA2-token --no-json -o contracts/main"
   },
   "keywords": [
     "tezos",
