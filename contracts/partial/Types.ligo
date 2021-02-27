@@ -20,6 +20,39 @@ type get_balance_type is GetBalanceType of get_balance_params
 [@inline] const noOperations : list(operation) = nil;
 
 
+// Yield Farmin Constructor types
+type deploy_fee_params is [@layout:comb] record [
+  deployFee: nat;
+  deployAndStakeFee: nat;
+  minStakeAmount: nat;
+]
+
+type deploy_and_stake_params is [@layout:comb] record [
+  deployAndStake: bool;
+  amountForStake: nat;
+]
+
+type deploy_yf_params_type is deploy_yf_params * deploy_and_stake_params
+
+type yfConstructorActions is
+| SetDeployFee of deploy_fee_params
+| SetDTZTokenAddress of address
+| SetDTZYFAddress of address
+| DeployYF of deploy_yf_params_type
+| WithdrawDTZTokens of unit
+| WithdrawDTZTokensCallback of nat
+
+type yfConstructorStorage is [@layout:comb] record [
+  admin: address;
+  dtzToken: address;
+  dtzYF: address;
+  deployFee: deploy_fee_params;
+  yieldFarmings: map(address, set(address));
+]
+
+type yfConstructorReturn is list(operation) * yfConstructorStorage
+
+
 // Yield Farming types
 type yfAccount is [@layout:comb] record [
   staked: nat;
