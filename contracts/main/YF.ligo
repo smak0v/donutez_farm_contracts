@@ -28,9 +28,8 @@ function updateRewards(var s : yfStorage) : yfStorage is
 block {
   if s.lastUpdateTime < Tezos.now then block {
     if s.totalStaked > 0n then block {
-      const deltaTime : nat = abs(Tezos.now - s.lastUpdateTime);
-      const deltaTimeInPeriods : nat = deltaTime / 1000n / s.yfParams.miningParams.periodInSeconds;
-      const newRewards : nat = deltaTime * s.yfParams.miningParams.rewardPerPeriod;
+      const deltaTimeInSeconds : nat = abs(Tezos.now - s.lastUpdateTime);
+      const newRewards : nat = deltaTimeInSeconds * s.yfParams.miningParams.rewardPerPeriod;
 
       s.rewardPerShare := s.rewardPerShare + newRewards / s.totalStaked;
     }
@@ -114,18 +113,15 @@ block {
   acc.reward := acc.reward + (acc.staked * abs(s.rewardPerShare - acc.lastRewardPerShare));
   acc.lastRewardPerShare := s.rewardPerShare;
 
-  const value : nat = acc.reward;
-
-  if value = 0n then
+  if acc.reward = 0n then
     skip
   else block {
-    acc.reward := 0n;
-
     operations := Tezos.transaction(
-      TransferType(Tezos.self_address, (Tezos.sender, value)),
+      TransferType(Tezos.self_address, (Tezos.sender, acc.reward)),
       0mutez,
       getYFRewardTokenTransferEntrypoint(s)
     ) # operations;
+    acc.reward := 0n;
   };
 
   s.ledger[Tezos.sender] := acc;
