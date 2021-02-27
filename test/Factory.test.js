@@ -93,7 +93,7 @@ contract("FactoryFA2", async () => {
       const fStorage = await fInstance2.storage();
 
       var value = await fStorage.tokenList.get(oleh.pkh);
-      
+
       console.log(value);
     });
   });
