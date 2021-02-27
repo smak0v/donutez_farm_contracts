@@ -14,7 +14,7 @@ module.exports = {
       host: "https://delphinet.smartpy.io",
       port: 443,
       network_id: "*",
-      secretKey: "...",
+      secretKey: "edskS3DCtGJsveC5MLQarnzEaWnLTsPHhqDediHEPadoJWT1PLLHQzwgnP4uttw7Hme9kzHiXjqq9XwNX4Ff94mXH61RFD5dCG",
       type: "tezos",
     },
     carthagenet: {
