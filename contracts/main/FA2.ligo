@@ -15,7 +15,7 @@ block {
 
 function iterate_transfer(const s : storage; const user_trx_params : transfer_param) : storage is
 block {
-  const sender_account : account = get_account(user_trx_params.from_, s);
+  var sender_account : account := get_account(user_trx_params.from_, s);
 
   if user_trx_params.from_ = Tezos.sender or sender_account.allowances contains Tezos.sender then
     skip
@@ -24,6 +24,8 @@ block {
 
   function make_transfer(const s : storage; const transfer : transfer_destination) : storage is
   block {
+    sender_account := get_account(user_trx_params.from_, s);
+
     if default_token_id =/= transfer.token_id then
       failwith("FA2_TOKEN_UNDEFINED")
     else
